@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thesis-defense-repro"
+version = "0.1.0"
+description = "Project-style reproductions of algorithms shown in the uploaded thesis defense slides"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
