@@ -265,17 +265,3 @@ python scripts/demo_active.py
 python scripts/demo_all.py
 ```
 
-## 论文/答辩未给出的关键信息
-
-以下内容PPT不足以精确恢复，所以项目没有伪造“原始精确值”：
-
-1. 企业训练集原始文件与划分；
-2. CLIP/OPT具体 checkpoint、tokenizer、预训练数据；
-3. image/text/audio encoder 的精确层数和隐藏维度；
-4. prompt verbalizer / label word 的完整定义；
-5. 主动学习的具体扰动算子；
-6. “食品相关二分类”具体聚类算法；
-7. 网络传播热度指数的公式；
-8. 大部分训练超参数。
-
-这些位置都在代码注释里标明了“standard reconstruction”或“proxy”。
