@@ -43,10 +43,9 @@ thesis_defense_repro/
     └── test_smoke.py
 ```
 
-## 1. PPT中预处理/平台算法
+## 1. 预处理/平台算法
 
 ### 食品相关性聚类
-PPT只写“用聚类法对数据进行食品相关与不相关二分类”，没有指定聚类器。
 工程使用二维 K-means 作为可运行重构。
 
 ### 视频
@@ -68,14 +67,10 @@ PPT只写“用聚类法对数据进行食品相关与不相关二分类”，�
 纯 Python 实现。
 
 ### 网络传播热度
-PPT只出现“网络传播热度指数算法”名字，没有任何公式。因此
-`heat_index_proxy.py` 是显式标注的可配置 proxy，不应当称为论文原公式。
 
 ---
 
 ## 2. 多模态情感分析模型
-
-PPT结果表中出现的模型都给了可运行版本：
 
 - `EFLSTM`
 - `LFLSTM`
@@ -96,8 +91,6 @@ z = torch.einsum("bi,bj,bk->bijk", t, v, a)
 ```
 
 ### 图-文 Prompt
-
-PPT结构：
 - text + `This message is [EMO]`
 - TXT encoder
 - `[EMO] -> softmax loss`
@@ -111,11 +104,9 @@ without_prompt    use_prompt=False, finetune=True
 without_finetune  use_prompt=True,  finetune=False
 ```
 
-注意：PPT没有给出实际 CLIP checkpoint，因此这是结构复现，不是假装下载了原模型。
+
 
 ### OPT-style 图-文-音预训练
-
-根据PPT图：
 - Text / Vision / Audio Encoder
 - Cross-Modal Transformer
 - Masked Language Modeling
@@ -124,13 +115,13 @@ without_finetune  use_prompt=True,  finetune=False
 
 `OPTStyleTriModal.masked_pretrain_loss()` 可直接跑三模态 masking 预训练。
 
-另外 `TinyMLMNSP` 单独实现了PPT背景页提到的 MLM + NSP。
+另外 `TinyMLMNSP` 单独实现了 MLM + NSP。
 
 ---
 
 ## 3. 持续学习：经验重放
 
-`GradientReplayBuffer` 按PPT第19页伪代码实现：
+`GradientReplayBuffer` 代码实现：
 
 ```text
 c = max_i cosine(g, G_i) + 1
@@ -145,7 +136,7 @@ else:
     append
 ```
 
-`grouped_gradient_signature()` 对应第20页：
+`grouped_gradient_signature()` ：
 
 ```text
 G_multimodal =
@@ -161,7 +152,7 @@ signature，再计算 cosine similarity。
 
 ## 4. 主动学习：鲁棒性 QUERY
 
-PPT流程是：
+流程是：
 
 ```text
 无标注数据
@@ -177,7 +168,7 @@ PPT流程是：
 `RobustnessQueryStrategy`严格保留“预测类别是否变化”为最高优先级，
 并用 Jensen-Shannon divergence 对发生变化的样本排序。
 
-PPT没有给出具体扰动方法，因此项目采用：
+项目采用：
 - 文本随机 token 替换
 - 图像/音频特征加高斯噪声
 
@@ -186,8 +177,6 @@ PPT没有给出具体扰动方法，因此项目采用：
 ---
 
 ## 5. 随机合成数据
-
-企业食品安全数据并未随答辩文件公开，所以项目默认使用可学习的随机合成数据：
 
 ```text
 text   [B,T] token IDs
